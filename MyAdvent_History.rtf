@@ -1,0 +1,481 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red83\green83\blue83;\red255\green255\blue255;
+\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c40000\c40000\c40000;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid1\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww22120\viewh12220\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs48 \cf0 My Python Adventure, revisited
+\fs36 \
+\
+
+\f1\b Forward
+\f0\b0 \
+\
+In the early 1980s, my computing resources at work were based on CRT terminals connected to DEC PDP based multi user computers.   The CRT terminals displayed 24 rows of 80 column text.\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8259 	}The timesharing host was a DEC System 2060 with the TOPS20 operating system, 4096 kilo words of memory (word = 36 bits).  The CPU was based on multiple AMD 2901 (4) bit slice chips running at some a speed up to 32 MHz.  I worked on the hardware development of products with this chipset.\
+{\listtext	\uc0\u8259 	}At first, I used a Hazeltine Modular One CRT terminal, based on the 8080 microprocessor.  This was later replaced with the CCC SLS-11, a CRT terminal for education that I helped to design.\
+\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li6\fi-7\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 It was on this computing equipment that I first encountered a version of the Colossal Cave Adventure game.  It was written by \cf2 \CocoaLigature0 Will Crowther (1975) & Don Woods (1976).  The interactive nature and clever depth of the game was fascinating, particularly for how software could be written to make it work.  This experience bolstered my dream of running my own computer at home someday in the future\'85with \'93Adventure\'94. 
+\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li462\fi-463\pardirnatural\partightenfactor0
+
+\f2\fs30    
+\fs28 Welcome to Adventure! Would you like instructions? \
+\
+   You are standing at the end of a road before a small brick building. Around \
+   you is a forest. A small stream flows out of the building and down a gully. \
+   Adventure> info\
+   For a summary of the most recent changes to the game, say 'news'. If you want \
+   to end your adventure early, say 'quit'. To see how well you are doing, say \
+   'score'. To get full credit for a treasure, you must have left it safely in \
+   the building. There are also points based on how much (if any) of the cave \
+   you have managed to explore.
+\fs30 \
+\
+\pard\tx0\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li13\fi-14\pardirnatural\partightenfactor0
+
+\f0\fs36 By 1982, I had multiple home computers that ran the CP/M operating system.  Only my 4 MHz Z80 based Dynabyte DB8/2 had enough RAM (64 kilobytes) to run a port of the Adventure game.  It was dead slow as the code had to open a data file on the floppy for every single move in the game.\
+\
+In 2011, I found several Adventure walkthroughs and code on the Internet (http://spitenet.com/cave/).  Using a CPM emulator ({\field{\*\fldinst{HYPERLINK "ftp://ftp.simtel.net/pub/simtelnet/msdos/emulate/z80mu52b.zip"}}{\fldrslt \cf3 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 Z80MU}}\cf5 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \'a0v5.2 from Joan Riff) \cf2 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 on a Windows machine, I wrote an 8080 assembly code version of Adventure.  Using a Fortran source of the 350 point version of the game, I decomposed the game messages.  I used a walkthrough map to design player navigation logic.  I wanted to run the game in 32 kilobytes of ram and the game text was far larger than that.  I devised an index based compression scheme with the 1500 unique words used in the game.  With a little more than 8 kilobytes of logic in 8080 assembly code, the game would run on a CPM system with 48 kilobytes of ram (application plus operating system) with no use of the floppy disk except to save or load a game in progress.  I developed the code on a Windows machine and moved binaries to the Dynabyte with a 4800 baud RS-232 serial connection.  As with many other Adventure ports, there were unique behaviors and features implemented to suit my efforts and goals.  A few features of the original code were left out, like a limitation on how many items the player can carry at one time.\
+\
+In 2020, the pandemic suddenly put me at home with a lifestyle that included more free time.  Using my 2011 Adventure game data, I wrote another clean sheet design in Python 2.  I wrote the 3150 lines of Python code with IDLE on a Mac.  I tested it on a Mojave Mac, on a Centos 8 Linux and on Windows 10.  Mac and Linux include Python2 in the respective distributions.  I added the Anaconda2 Individual bundle to the Windows 10 machine. (https://repo.anaconda.com/archive/)  Many aspects of the implementation were easier than assembly; some were a bit challenging (like I/O that does not require an enter/return keystroke).  I solved these problems and I added a few features for debugging and study of the game design.  \
+\
+
+\f1\b MyAdvent News
+\f0\b0 \
+\
+I wrote Python2 based code assuming that I would be the only person to ever use it, but I added several features just in case. It may be that these words will be found and someone sharing my interests will use my code to learn what I did.   This code 
+\f1\b does not work
+\f0\b0  with Python 3.  It does not run within the Python IDLE debugger (F5).  It only runs from a shell. (\'93python myadvent.py\'94) See the description under the \'93feel of text input\'94 for why.\
+\
+
+\f1\b Features Unique to This Implementation\
+\
+
+\f0\b0 When I wrote an 8080 assembly version of this 350 point Adventure game in 2011, I had to keep an eye on the byte size goal (32 kilobytes) and the complete responsibility of low level coding.  There were no fancy libraries for I/O or string manipulation.  With an almost infinite set of Python libraries, feature creep is fun and it speeds up the deployment.  The \'93news\'94 command describes most of what I added as I wrote the code.  The assembly version did have some of these features (f, b, load, save, room).\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs22 \
+Adventure> news\
+This is a python 2.x based Colossal Cave Adventure.\
+It was tested on MacOS 10.1.6 Mojave and Windows 10\
+'forest door' runs the automated cave test\
+\
+Special notes in this version:\
+ 'load' restores the game state from a game 'save'\
+ 'look' shows the current room long description without admonishment\
+ 'map' shows the nearby room map moves.\
+ 'map enable' displays a map with every move.\
+ 'map disable' turns off automatic map display.\
+ 'map all' shows moves for all rooms.\
+ 'room' lists all possible moves not blocked by magic for the current room\
+ 'save' preserves the current game state in a file named 'myadvent.sav'\
+ 'jump' might be deadly in some rooms with pits.\
+Magazine magic can map the All Alike maze. Get one magazine, drop 12 monthly editions.\
+TAB autocompletes (b)uilding, (d)ownstream, (f)orest, (g)rate, (i)nventory, (r)eservoir, (v)ariables, (q)uit\
+\
+'cheat' enables and disables commands for game design study.\
+Enter 'y' to see more about the 'cheat' commands.\
+\
+Commands that are available in 'cheat' mode.\
+ 'f' moves forward one room by internal room number.\
+ 'b' moves back one room by internal room number\
+ 'jump' moves to a specific room number. Jump is dangerous when not in debug mode.\
+ 'words' lists all action and object words\
+ 'variables' lists most internal game variables\
+ 'showrooms' lists all unvisted rooms with room numbers.\
+Cheat mode adds these room displays:\
+- The internal map room number with every move.\
+- Pirate movements when in rooms 50-59.\
+- Dwarf movements and attack countdown when in rooms 40-45.\
+\
+\
+You are outside building. \
+Adventure>
+\f1\b\fs36 \
+\pard\tx0\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li13\fi-14\pardirnatural\partightenfactor0
+\
+The \'93feel\'94 of text input
+\f0\b0 \
+\
+The original text based game had a special \'93feel\'94 to the user interface.  Some commands were only recognized after an \'93enter/return\'94 keystroke.  Some commands were laborious to type and a unix \'93autocomplete\'94 capability was desirable.  Some commands, in the spirit of the game \'93feel\'94, needed to be a single keystroke, like the first and last prompts that respond to a single \'93y\'94 or \'93n\'94.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs28 Welcome to Adventure! Would you like instructions? \
+\
+You are standing at the end of a road before a small brick building. Around \
+you is a forest. A small stream flows out of the building and down a gully. \
+Adventure>\
+\pard\tx0\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li13\fi-14\pardirnatural\partightenfactor0
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+You are at east end of Hall of Mists. \
+ADVenture> quit\
+Are you sure you want to quit?  \
+Your current score is 295 out of 350 after 277 moves.\
+Rooms= 119/125  Treasures= 96/120  Puzzles= 80/100  Endgame= 0/5\
+The next rank is 340 points. \
+Your score puts you in Master Adventurer class B.\
+\pard\tx0\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li13\fi-14\pardirnatural\partightenfactor0
+
+\f0\fs36 \
+In Python 2, there are two separate \'93getch\'94 functions (Linux and Windows) that collect single keystrokes without the \'93enter/return\'94 burden of \'93raw_input\'94.  \'93getch\'94 does not work if the code is run from IDLE, which has its own keystroke capture mechanism for IDE controls.  As a result, this game only runs from a command line, e.g. \'93python my_advent.py\'94.  The code would start the game and quickly find an exception, so it is coded to block execution in IDLE.\
+\
+\pard\tx0\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li13\fi-14\pardirnatural\partightenfactor0
+
+\f2\fs28 Welcome to Adventure! Would you like instructions? \
+Please run me on the command line, not in IDLE.\
+>>> 
+\f0\fs36 \
+\
+I implemented a Linux-like autocomplete for some of the commands.  One types a single letter, followed by a \'93tab\'94 key.  The code rewrites the command prompt and command line, waiting for an enter/return keystroke.  On a personal note, this helps with some of the commands that I eternally mistype\'85\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs22 TAB autocompletes (b)uilding, (d)ownstream, (f)orest, (g)rate, (i)nventory, (r)eservoir, (v)ariables, (q)uit
+\f0\fs36 \
+\pard\tx0\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li13\fi-14\pardirnatural\partightenfactor0
+\
+
+\f1\b Navigating the Cave
+\f0\b0 \
+\
+While I have found illustrated \'93Colossal Cave\'94 maps on the Internet, I thought it would be useful to embed a map into the game.  Below is an automated display of the nearby rooms, showing the current player location.  The notation of compass directions and room numbers show the possible moves available.  When \'93Outside Building\'94 (room 0), the player can go \'93east\'94 (with \'93e\'94 or \'93east\'94) and get to Inside Building (room 1) and the player can go \'93west\'94 (with \'93w\'94 or \'93west\'94) and get to End of Road (room 2).
+\fs30 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs28 You are outside building. \
+----------------------------------------------------------------------------------\
+| 2 End of Road            * 0 Outside Building       * 1 Inside Building        |\
+| E0,W3,S6,N5,U3           * E1,W2                    * W0                       |\
+---------------------------****************************---------------------------\
+| 4 Forest near road       | 5 Open Forest            | 3 Hill in Road           |\
+| E6,S5                    | E4,N4                    | E2,W4,S5                 |\
+----------------------------------------------------------------------------------\
+| 6 Valley                 | 7 Slit in Streambed      | 8 Outside Grate          |\
+| E5,W5,S7,N2              | S8,N6                    | N7                       |\
+----------------------------------------------------------------------------------\
+Adventure> 
+\fs30 \
+\pard\tx0\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li13\fi-14\pardirnatural\partightenfactor0
+
+\f0 \
+\pard\tx0\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li13\fi-14\pardirnatural\partightenfactor0
+
+\fs36 There is a lot of logic running with every move in the game.\
+\
+
+\f1\b Dwarf Logic
+\f0\b0 \
+\
+The nasty little dwarf can kill the player, resetting the game.  When the player moves,  the dwarf appears in a random range of rooms 40 through 46.  After 7 dwarf encounters of the player in the same room, the dwarf throws his axe at the player.  There is a one in three chance that the axe hits the player and resets the game.  If the dwarf misses, the axe is available to the player for a future dwarf encounter.  There is a one in three chance that a player kills a dwarf in the room by throwing the axe.  In the debug (a.k.a cheat) mode, one can watch the dwarf logic in play.   I did wander from the original game feel for player death.  The original game asks the player for an optional re-incarnation, my logic skips that.
+\fs30 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs22 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 Adventure> e\
+You cannot get past the snake. \
+A huge green fierce snake bars the way! \
+dwarf now in room 40 attack downcounter= 1\
+A dwarf just walked around a corner, saw you, and threw a little axe at you! \
+Oh dear. The nasty little axe hit you! \
+ X\
+  X\
+   X\
+    X\
+     X\
+      X\
+      X\
+      X\
+      X\
+      X\
+    XXXXX\
+Oh dear, You have fallen into a pit. \
+You have broken everything including the scoreboard! \
+Poof! \
+You are standing at the end of a road before a small brick building. Around \
+you is a forest. A small stream flows out of the building and down a gully. \
+Adventure> 
+\fs30 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b\fs36 \
+Bear Logic
+\f0\b0 \
+\
+The 800 pound bear befriends the player when the gold chain treasure is unlocked.  The bear follows the player until it is told to go away.\
+If the player attempts to cross the rickety bridge, the 800 pound bear will follow, which destroys the bridge.  There is a one in three chance\
+that the rickety bridge collapse will kill the player and reset the game.  After the rickety bridge collapse, if the player survives, the\
+rooms beyond the rickety bridge are no longer accessible in the game.
+\fs30 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs28 You are walking along a gently sloping north/south passage lined with oddly \
+shaped limestone formations. \
+\
+Adventure> e\
+You are standing at the entrance to a large, barren room. A sign posted above \
+the entrance reads: "Caution! Bear in room!" \
+\
+Adventure> e\
+The bear is locked to the wall with a golden chain! \
+You are in the barren room. The center of the room is completely empty except \
+for some dust. Marks in the dust lead away toward the far end of the room. \
+The only exit is the way you came in. \
+There is a ferocious cave bear eying you from the far end of the room! \
+\
+Adventure> feed bear\
+The hungry bear eats your food. \
+There is a very large brown bear here. \
+You are inside a barren room. \
+There is a very large brown bear here. \
+\
+Adventure> unlock chain\
+There is a contented-looking bear wandering about nearby. \
+You are inside a barren room. \
+There is a golden chain here! \
+\
+Adventure> take chain\
+chain taken.\
+You are inside a barren room. \
+\
+Adventure> w\
+You are being followed by a very large, tame bear. \
+You are at entrance of the barren room. \
+\
+Adventure> w\
+You are being followed by a very large, tame bear. \
+You are in limestone passage. \
+\
+Adventure> n\
+You are being followed by a very large, tame bear. \
+You are in a corridor. The path forks here. The left fork leads northeast. \
+A dull rumbling seems to get louder in that direction. The right fork leads \
+southeast down a gentle slope. The main corridor enters from the west. \
+\
+Adventure> w\
+You are being followed by a very large, tame bear. \
+You are in a long, narrow E/W corridor stretching out of sight to the west. \
+A faint rumbling noise can be heard in the distance. \
+\
+Adventure> w\
+You are being followed by a very large, tame bear. \
+A rickety wooden bridge extends across the chasm, vanishing into the mist. \
+A sign posted on the bridge reads, "STOP! Pay troll!" \
+You are on the far side of the chasm. A NE path leads away from the chasm \
+on this side. \
+\
+Adventure> cross bridge\
+A burly troll stands by the bridge and insists you throw him a treasure before \
+you may cross. \
+You are on NE side of chasm. \
+\
+Adventure> throw chain\
+The troll catches the chain and scurries away.\
+You are on NE side of chasm. \
+\
+Adventure> cross bridge\
+Just as you reach the other side, the bridge buckles beneath the weight of the bear,\
+which was still following you around.  You scrabble desperately for support, but as\
+the bridge collapses, you stumble back and fall into the chasm.\
+ X\
+  X\
+   X\
+    X\
+     X\
+      X\
+      X\
+      X\
+      X\
+      X\
+    XXXXX\
+Oh dear, You have fallen into a pit. \
+You have broken everything including the scoreboard! \
+Poof! \
+You are standing at the end of a road before a small brick building. Around \
+you is a forest. A small stream flows out of the building and down a gully. \
+Adventure> 
+\fs30 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \
+\
+
+\f1\b\fs36 Pirate Logic
+\f0\b0 \
+\
+This is a 350 point game, but one room point requires that a randomly placed Pirate rob the player.\
+The Pirate robs the player when randomly appearing in the same room for the third time.\
+The first two encounters are indicated with a message 
+\fs30 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs28 There are faint rustling noises from the darkness behind you.
+\f0\fs30 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs36 A Pirate robbery moves all treasures carried by the player to the Pirate Lair.  The Pirate Lair is accessible from the All Alike Maze only after a robbery occurs.  Without a robbery, the best a player can achieve is 124 out of 125 room visits in the Endgame.  When robbed, the player can fully recover all of the treasures for a perfect score, provided some there efficient moves to the Pirate Lair to avoid game duration limits.
+\fs30 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs28 You are at NE end. \
+Adventure> showrooms\
+List of rooms not yet visited.\
+------------------------------\
+room 48 Pirate Lair\
+You are at NE end. \
+\
+Adventure> score\
+Your current score is 349 out of 350 after 277 moves.\
+Rooms= 124/125  Treasures= 120/120  Puzzles= 100/100  Endgame= 5/5\
+You are at NE end. \
+current room= 123\
+\
+Adventure> 
+\fs30 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \
+
+\f0\fs36 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b Testing
+\f0\b0 \
+\
+I wanted to enjoy devising the game without burning out with too many test runs, playing it by hand.  I invested some time in automated testing.  I found a lot of bugs with this feature.   The test run goes to all but one room (Pirate Lair), runs all puzzles, collects all treasures and lands in the end game phase.  The \'93forest\'94 magic word is a simple function with 200 additional lines of Python code to implement the automated \'93forest door\'94 testing.  The automated test can only be run once for multiple reasons.  \
+ - At the end of a test run, all the treasures have been dropped in the Building.  \
+ - After 382 turns the lantern batteries die during the second run and the player falls in a pit\
+ - Eventually the Dwarf lands the axe, killing the player.  \
+ - I had to disable the Pirate, he always managed to interfere.
+\fs30 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs22 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 You are standing at the end of a road before a small brick building. Around \
+you is a forest. A small stream flows out of the building and down a gully. \
+Adventure> forest door\
+#######################################################\
+Start Cave Testing. Hit Enter/Return to start or stop.\
+\
+(382 tests occur here)\
+\
+Cave Test Complete. \
+#######################################################\
+You are at NE end. \
+Adventure> score\
+Your current score is 349 out of 350 after 277 moves.\
+Rooms= 124/125  Treasures= 120/120  Puzzles= 100/100  Endgame= 5/5\
+You are at NE end. \
+Adventure> showrooms\
+List of rooms not yet visited.\
+------------------------------\
+room 48 Pirate Lair\
+You are at NE end. \
+Adventure> 
+\fs30 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \
+
+\f0\fs36 While developing the tests, I wanted to see the logic turn by turn without hundreds of keystrokes.  On the Mac, hundreds of tests run instantly, so I added a 2 second delay to permit passive observation.  I also added a keyboard interrupt routine so that I did not have to wait hundreds of seconds on a dead-end run or lose my program state with a control/c.  Python execution on Windows 10 is far slower, making the 2 second delay unnecessary and the keyboard interrupt quite valuable.\
+
+\f2\fs22 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28     if True == kbhit():\
+        break\
+        time.sleep(2)\
+#\
+# detect a keystroke to interrupt forest door\
+# Returns True if a keypress is waiting to be read in stdin, False otherwise.\
+# code runs on Linux, Windows support ripped out https://stackoverflow.com/questions/292095/polling-the-keyboard-detect-a-keypress-in-python\
+#\
+def kbhit():\
+    dr,dw,de = select.select([sys.stdin], [], [], 0)\
+    return dr != []
+\fs30 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \
+
+\f0\fs36 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b Game Duration
+\f0\b0 \
+\
+The original game design limited the number of player turns and the logic for this implementation interprets things in a similar way.  After 300 turns, the lamp is turned off, assuring doom after 3 additional turns that send the player into a pit.  If the coins treasure is given up, the player may continue, doomed to a less than perfect score.
+\fs28 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs22 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 #\
+# lamp life test\
+#\
+    if myvars[159] == 230:                        # 230 turns taken\
+        mysentence(mysent[436])                   # lamp getting dim\
+    if myvars[159] == 265:                        # 265 turns taken\
+        mysentence(mysent[437])                   # lamp is almost dead\
+    if myvars[159] > 300 and myvars[142] != 130:  # 300 turns, no coins used?\
+        mysentence(mysent[438])                   # lamp is now dead\
+        myvars[158] = 4                           # lamp set to dark\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs36 \
+Once the player has accumulated 12 of the treasures in the Building, the game logic forces the player toward the end game even if the remaining treasures are not collected.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 #\
+# cave closure test for 12 found treasures in Well House, magazine does not count\
+#\
+    count = 0\
+    treasures = [142,143,144,145,146,147,148,149,150,152,153,154,155,156,157]\
+    for trophy in treasures:\
+        if myvars[int(trophy)] == 1:  # this treasure found?\
+            count += 1 \
+    if count >= 12:                   # 12 treasures in well house?\
+        myvars[171] += 1              # indicate cave is closing\
+    if myvars[171] > 9:               # every ten turns, announce closure\
+        myvars[171] = 1               # reset counter\
+        mysentence(mysent[469])       # cave is closing\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b\fs36 \
+Words and Sentences
+\f0\b0 \
+\
+There are many print statements in the code, but the item count only represents a small fraction of the displayed statements.  In the earlier assembler version, I built a library of words and the sentences were named word lists.  In assembly, this was a very efficient compression of the memory footprint with almost no processing overhead after the code was assembled.  This collection of words and sentences were ported to Python with a few tool scripts.  Examination of the code will not directly show most of the program run time sentences.  It keeps some of the game intrigue and mystery in place despite access to the Python source code.\
+}
